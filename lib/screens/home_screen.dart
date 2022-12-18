@@ -4,7 +4,6 @@ import 'package:reels_app/screens/library_page.dart';
 import 'package:reels_app/screens/record_video_screen.dart';
 
 import '../widgets/navigation_bar_widget.dart';
-import '../widgets/video_player_widget.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -16,8 +15,8 @@ class HomeScreen extends StatefulWidget {
 class _HomeScreenState extends State<HomeScreen> {
   int currentIndex = 0;
   final List<Widget> pages = [
-    ExplorePage(),
-    LibraryPage(),
+    const ExplorePage(),
+    const LibraryPage(),
   ];
   @override
   Widget build(BuildContext context) {
@@ -43,7 +42,7 @@ class _HomeScreenState extends State<HomeScreen> {
       floatingActionButtonLocation:
           FloatingActionButtonLocation.miniCenterDocked,
       floatingActionButton: IconButton(
-        icon: Icon(
+        icon: const Icon(
           Icons.add,
           color: Colors.black,
           size: 40,
@@ -52,7 +51,7 @@ class _HomeScreenState extends State<HomeScreen> {
           Navigator.push(
             context,
             MaterialPageRoute(
-              builder: (context) => RecordVideoScreen(),
+              builder: (context) => const RecordVideoScreen(),
             ),
           );
         },

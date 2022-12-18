@@ -1,10 +1,14 @@
 import 'package:flutter/material.dart';
+import 'package:reels_app/models/video_model.dart';
 import 'package:reels_app/screens/video_details_screen.dart';
 import 'package:video_player/video_player.dart';
 
 class VideoPlayerWidget extends StatefulWidget {
-  VideoPlayerWidget({super.key});
-
+  const VideoPlayerWidget({
+    super.key,
+    required this.video,
+  });
+  final VideoModel? video;
   @override
   State<VideoPlayerWidget> createState() => _VideoPlayerWidgetState();
 }
@@ -15,8 +19,8 @@ class _VideoPlayerWidgetState extends State<VideoPlayerWidget> {
   void initState() {
     super.initState();
     controller = VideoPlayerController.network(
-        'https://flutter.github.io/assets-for-api-docs/assets/videos/bee.mp4')
-      ..initialize().then((value) {
+      widget.video!.videoUrl!,
+    )..initialize().then((value) {
         setState(() {});
       });
   }
@@ -30,7 +34,7 @@ class _VideoPlayerWidgetState extends State<VideoPlayerWidget> {
             alignment: Alignment.center,
             children: [
               AspectRatio(
-                aspectRatio: controller.value.aspectRatio,
+                aspectRatio: 4 / 3,
                 child: VideoPlayer(controller),
               ),
               IconButton(
@@ -38,36 +42,39 @@ class _VideoPlayerWidgetState extends State<VideoPlayerWidget> {
                   Navigator.push(
                     context,
                     MaterialPageRoute(
-                      builder: (context) => VideoDetailsScreen(),
+                      builder: (context) => VideoDetailsScreen(
+                        video: widget.video!,
+                      ),
                     ),
                   );
                 },
-                icon: Icon(
-                  Icons.play_arrow_outlined,
+                icon: const Icon(
+                  Icons.play_circle,
                   size: 45,
                   color: Colors.white,
                 ),
               ),
             ],
           ),
-          SizedBox(
+          const SizedBox(
             height: 10,
           ),
           Row(
             children: [
               CircleAvatar(
                 backgroundImage: NetworkImage(
-                    "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQQ-YIPLhIBLVQKh_S4BNo18b03Ct5P_iYFeBBjDCYx&s"),
+                  widget.video!.user!.imgUrl!,
+                ),
               ),
-              SizedBox(
+              const SizedBox(
                 width: 10,
               ),
               Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
-                    "bee life",
-                    style: TextStyle(
+                    widget.video!.title!,
+                    style: const TextStyle(
                       fontSize: 18,
                       fontWeight: FontWeight.bold,
                     ),
@@ -75,16 +82,16 @@ class _VideoPlayerWidgetState extends State<VideoPlayerWidget> {
                   Row(
                     children: [
                       Text(
-                        "Waleed Shehab",
-                        style: TextStyle(
+                        widget.video!.user!.phoneNumber!,
+                        style: const TextStyle(
                           fontSize: 12,
                           fontWeight: FontWeight.bold,
                         ),
                       ),
-                      SizedBox(
+                      const SizedBox(
                         width: 5,
                       ),
-                      Text(
+                      const Text(
                         "100 views",
                         style: TextStyle(
                           fontSize: 12,
@@ -94,13 +101,13 @@ class _VideoPlayerWidgetState extends State<VideoPlayerWidget> {
                   ),
                 ],
               ),
-              Spacer(),
+              const Spacer(),
               Column(
                 crossAxisAlignment: CrossAxisAlignment.end,
                 children: [
                   Text(
-                    "Egypt",
-                    style: TextStyle(
+                    widget.video!.location!,
+                    style: const TextStyle(
                       fontSize: 12,
                       fontWeight: FontWeight.bold,
                     ),
@@ -108,17 +115,17 @@ class _VideoPlayerWidgetState extends State<VideoPlayerWidget> {
                   Row(
                     children: [
                       Text(
-                        "12 days ago",
-                        style: TextStyle(
+                        widget.video!.date!,
+                        style: const TextStyle(
                           fontSize: 12,
                         ),
                       ),
-                      SizedBox(
+                      const SizedBox(
                         width: 5,
                       ),
                       Text(
-                        "sport",
-                        style: TextStyle(
+                        widget.video!.category!,
+                        style: const TextStyle(
                           fontSize: 12,
                         ),
                       ),

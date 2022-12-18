@@ -3,6 +3,8 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:reels_app/helper/firebase_firestore_helper.dart';
 import 'package:reels_app/helper/location_helper.dart';
+import 'package:reels_app/models/user_model.dart';
+import 'package:reels_app/models/video_model.dart';
 import 'package:video_player/video_player.dart';
 
 class PostPreviewScreen extends StatefulWidget {
@@ -48,8 +50,20 @@ class _PostPreviewScreenState extends State<PostPreviewScreen> {
         child: const Text("Post"),
         onPressed: () async {
           if (formKey.currentState!.validate()) {
-            String url = await FirebaseFireStoreHelper.uploadVideo(widget.path);
-            print(url);
+            await FirebaseFireStoreHelper.uploadVideo(widget.path)
+                .then((value) {
+              FirebaseFireStoreHelper.postVideo(
+                  video: VideoModel(
+                videoUrl: value,
+                category: categoryController.text,
+                title: titleController.text,
+                location: locationController.text,
+                date: DateTime.now().toString(),
+                user: UserModel.currentUser,
+              )).then((value) {
+                Navigator.pop(context);
+              });
+            });
           }
         },
       ),
@@ -60,6 +74,7 @@ class _PostPreviewScreenState extends State<PostPreviewScreen> {
             key: formKey,
             child: Column(children: [
               TextFormField(
+                controller: titleController,
                 validator: (value) {
                   if (value!.isEmpty) {
                     return "title must not be empty";
@@ -71,7 +86,7 @@ class _PostPreviewScreenState extends State<PostPreviewScreen> {
                     border: OutlineInputBorder(
                         borderRadius: BorderRadius.circular(15))),
               ),
-              SizedBox(
+              const SizedBox(
                 height: 10,
               ),
               Row(
@@ -91,11 +106,12 @@ class _PostPreviewScreenState extends State<PostPreviewScreen> {
                               borderRadius: BorderRadius.circular(15))),
                     ),
                   ),
-                  SizedBox(
+                  const SizedBox(
                     width: 15,
                   ),
                   Expanded(
                     child: TextFormField(
+                      controller: categoryController,
                       validator: (value) {
                         if (value!.isEmpty) {
                           return "title must not be empty";
@@ -110,7 +126,7 @@ class _PostPreviewScreenState extends State<PostPreviewScreen> {
                   ),
                 ],
               ),
-              SizedBox(
+              const SizedBox(
                 height: 10,
               ),
               InkWell(
