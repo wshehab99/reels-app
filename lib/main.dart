@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:reels_app/screens/home_screen.dart';
 import 'package:reels_app/screens/login_screen.dart';
 
 import 'helper/firebase_helper.dart';
@@ -19,7 +20,7 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
-      home: LoginScreen(),
+      home: HomeScreen(),
     );
   }
 }
