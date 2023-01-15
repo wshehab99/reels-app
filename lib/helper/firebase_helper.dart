@@ -1,4 +1,5 @@
 import 'package:firebase_auth/firebase_auth.dart';
+// ignore: depend_on_referenced_packages
 import 'package:firebase_core/firebase_core.dart';
 
 import 'firebase_firestore_helper.dart';
@@ -6,9 +7,7 @@ import 'firebase_firestore_helper.dart';
 class FireBaseHelper {
   static PhoneAuthCredential? credential;
   static Future init() async {
-    FirebaseApp app = await Firebase.initializeApp().whenComplete(() {
-      print("completed");
-    });
+    await Firebase.initializeApp().whenComplete(() {});
   }
 
   static Future<void> verifyPhoneNumber(String phoneNumber) async {
@@ -21,13 +20,9 @@ class FireBaseHelper {
         codeAutoRetrievalTimeout: codeAutoRetrievalTimeout);
   }
 
-  static void verificationCompleted(PhoneAuthCredential credential) {
-    print(credential.smsCode);
-  }
+  static void verificationCompleted(PhoneAuthCredential credential) {}
 
-  static void verificationFailed(FirebaseAuthException exception) {
-    print(exception.message);
-  }
+  static void verificationFailed(FirebaseAuthException exception) {}
 
   static void codeSent(String verificationId, int? resendToken) {
     String smsCode = '';
@@ -35,9 +30,7 @@ class FireBaseHelper {
         verificationId: verificationId, smsCode: smsCode);
   }
 
-  static void codeAutoRetrievalTimeout(String verificationId) {
-    print("timeout $verificationId");
-  }
+  static void codeAutoRetrievalTimeout(String verificationId) {}
 
   static Future<UserCredential> confirm(String smsCode) async {
     credential = PhoneAuthProvider.credential(

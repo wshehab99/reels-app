@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:reels_app/helper/firebase_firestore_helper.dart';
 import 'package:reels_app/models/video_model.dart';
 
-import '../widgets/video_player_widget.dart';
+import '../../../common/widgets/video_player_widget.dart';
 
 class ExplorePage extends StatefulWidget {
   const ExplorePage({super.key});
@@ -21,7 +21,6 @@ class _ExplorePageState extends State<ExplorePage> {
     loading = true;
     FirebaseFireStoreHelper.gitVideos().then((value) {
       snapshot = value;
-      print("snapshot 1 $snapshot");
       loading = false;
       setState(() {});
     });
