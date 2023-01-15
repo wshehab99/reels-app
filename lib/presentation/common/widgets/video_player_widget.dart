@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:reels_app/models/video_model.dart';
-import 'package:reels_app/screens/video_details_screen.dart';
 import 'package:video_player/video_player.dart';
+
+import '../../video_details/video_details_screen.dart';
 
 class VideoPlayerWidget extends StatefulWidget {
   const VideoPlayerWidget({

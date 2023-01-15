@@ -1,9 +1,13 @@
 import 'package:fl_country_code_picker/fl_country_code_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_verification_code/flutter_verification_code.dart';
+import 'package:reels_app/presentation/resources/color_manger.dart';
+import 'package:reels_app/presentation/resources/size_manger.dart';
+import 'package:reels_app/presentation/resources/string_manger.dart';
 
-import '../helper/firebase_helper.dart';
-import 'home_screen.dart';
+import '../../helper/firebase_helper.dart';
+import '../home/home_screen.dart';
+import '../resources/assets_manger.dart';
 
 class OTPScreen extends StatefulWidget {
   const OTPScreen({
@@ -37,51 +41,52 @@ class _OTPScreenState extends State<OTPScreen> {
             children: [
               Center(
                   child: Image.asset(
-                "assets/img/logo.png",
-                height: 200,
+                AssetsManager.logo,
+                height: SizesManger.s200,
               )),
               const SizedBox(
-                height: 25,
+                height: SizesManger.s25,
               ),
               const Text(
-                "Verify phone number",
+                StringManger.verifyPhoneNumber,
                 style: TextStyle(
-                  fontSize: 26,
+                  fontSize: SizesManger.s26,
                   fontWeight: FontWeight.bold,
                 ),
               ),
               const SizedBox(
-                height: 10,
+                height: SizesManger.s10,
               ),
               Text(
-                "Check your SMS messages. We've sent you the PIN at ${widget.phoneNumber}",
+                "${StringManger.checkYourSMSmessages} ${widget.phoneNumber}",
                 style: const TextStyle(
-                  fontSize: 16,
+                  fontSize: SizesManger.s15,
                   fontWeight: FontWeight.w400,
                 ),
               ),
               const SizedBox(
-                height: 20,
+                height: SizesManger.s20,
               ),
               Center(
                 child: VerificationCode(
-                  textStyle: TextStyle(fontSize: 20.0, color: Colors.blue[900]),
+                  textStyle: const TextStyle(
+                      fontSize: SizesManger.s20, color: ColorManger.darkBlue),
                   keyboardType: TextInputType.number,
-                  underlineColor: Colors
+                  underlineColor: ColorManger
                       .amber, // If this is null it will use primaryColor: Colors.red from Theme
-                  length: 6,
-                  cursorColor: Colors
+                  length: SizesManger.s6,
+                  cursorColor: ColorManger
                       .blue, // If this is null it will default to the ambient
                   // clearAll is NOT required, you can delete it
                   // takes any widget, so you can implement your design
-                  clearAll: Padding(
-                    padding: const EdgeInsets.all(8.0),
+                  clearAll: const Padding(
+                    padding: EdgeInsets.all(8.0),
                     child: Text(
-                      'clear all',
+                      StringManger.clearAll,
                       style: TextStyle(
-                          fontSize: 14.0,
+                          fontSize: SizesManger.s15,
                           decoration: TextDecoration.underline,
-                          color: Colors.blue[700]),
+                          color: ColorManger.darkBlue),
                     ),
                   ),
                   onCompleted: (String value) {
@@ -104,7 +109,7 @@ class _OTPScreenState extends State<OTPScreen> {
                       onPressed: () async {
                         await FireBaseHelper.resendOTP(widget.phoneNumber!);
                       },
-                      child: const Text("Did not get OTP, resend?")),
+                      child: const Text(StringManger.resendOTP)),
                 ],
               ),
               const SizedBox(
@@ -117,10 +122,10 @@ class _OTPScreenState extends State<OTPScreen> {
                       Navigator.pushReplacement(
                           context,
                           MaterialPageRoute(
-                              builder: (context) => HomeScreen()));
+                              builder: (context) => const HomeScreen()));
                     });
                   },
-                  child: const Text("Verify"),
+                  child: const Text(StringManger.verify),
                 ),
               ),
             ],

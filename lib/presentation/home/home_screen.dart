@@ -1,9 +1,12 @@
 import 'package:flutter/material.dart';
-import 'package:reels_app/screens/explore_page.dart';
-import 'package:reels_app/screens/library_page.dart';
-import 'package:reels_app/screens/record_video_screen.dart';
+import 'package:reels_app/presentation/resources/color_manger.dart';
+import 'package:reels_app/presentation/resources/string_manger.dart';
 
-import '../widgets/navigation_bar_widget.dart';
+import '../common/widgets/navigation_bar_widget.dart';
+import '../record_video/record_video_screen.dart';
+import '../resources/size_manger.dart';
+import 'pages/explore_page/explore_page.dart';
+import 'pages/library_page/library_page.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -24,8 +27,8 @@ class _HomeScreenState extends State<HomeScreen> {
       appBar: AppBar(actions: [
         TextButton(
           child: const Text(
-            "Notifications",
-            style: TextStyle(color: Colors.black),
+            StringManger.notifications,
+            style: TextStyle(color: ColorManger.black),
           ),
           onPressed: () {},
         )
@@ -45,7 +48,7 @@ class _HomeScreenState extends State<HomeScreen> {
         icon: const Icon(
           Icons.add,
           color: Colors.black,
-          size: 40,
+          size: SizesManger.s40,
         ),
         onPressed: () {
           Navigator.push(

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:reels_app/widgets/camera_widget.dart';
+import 'package:reels_app/presentation/common/widgets/camera_widget.dart';
+import 'package:reels_app/presentation/resources/string_manger.dart';
 
 class RecordVideoScreen extends StatelessWidget {
   const RecordVideoScreen({super.key});
@@ -8,9 +9,9 @@ class RecordVideoScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text("Record"),
+        title: const Text(StringManger.record),
       ),
-      body: CameraPage(),
+      body: const CameraPage(),
     );
   }
 }

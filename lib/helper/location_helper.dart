@@ -9,7 +9,6 @@ class LocationHelper {
     serviceEnabled = await Geolocator.isLocationServiceEnabled();
     if (!serviceEnabled) {
       permissionGranted = await Geolocator.requestPermission();
-      print(permissionGranted.name);
       if (permissionGranted == LocationPermission.denied ||
           permissionGranted == LocationPermission.deniedForever ||
           permissionGranted == LocationPermission.unableToDetermine) {

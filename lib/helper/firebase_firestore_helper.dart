@@ -26,19 +26,16 @@ class FirebaseFireStoreHelper {
   static List<VideoModel> videos = [];
   static Future<List<VideoModel>> gitVideos() async {
     videos.clear();
-    print(1);
     QuerySnapshot<Map<String, dynamic>> value = await FirebaseFirestore.instance
         .collection('videos')
         .orderBy("date")
         .get();
-    print(2);
     await Future.forEach(value.docs, (element) async {
       DocumentSnapshot<Map<String, dynamic>> user =
           await getUserById(element.data()['userId']);
       Map<String, dynamic> json = element.data();
       json.addAll({"user": user.data()});
       videos.add(VideoModel.fromMap(json: json));
-      print(videos);
     });
 
     return videos;

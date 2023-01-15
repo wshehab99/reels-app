@@ -1,6 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:reels_app/models/video_model.dart';
+import 'package:reels_app/presentation/resources/color_manger.dart';
+import 'package:reels_app/presentation/resources/string_manger.dart';
 import 'package:video_player/video_player.dart';
+
+import '../resources/size_manger.dart';
 
 class VideoDetailsScreen extends StatefulWidget {
   const VideoDetailsScreen({
@@ -49,18 +53,18 @@ class _VideoDetailsScreenState extends State<VideoDetailsScreen> {
                         controller.value.isPlaying
                             ? Icons.pause
                             : Icons.play_arrow_outlined,
-                        size: 45,
-                        color: Colors.white,
+                        size: SizesManger.s45,
+                        color: ColorManger.white,
                       ))
                 ],
               ),
               const SizedBox(
-                height: 10,
+                height: SizesManger.s10,
               ),
               Text(
                 widget.video!.title!,
-                style: TextStyle(
-                  fontSize: 18,
+                style: const TextStyle(
+                  fontSize: SizesManger.s18,
                   fontWeight: FontWeight.bold,
                 ),
               ),
@@ -70,19 +74,20 @@ class _VideoDetailsScreenState extends State<VideoDetailsScreen> {
                   TextButton(
                     onPressed: () {},
                     child: Container(
-                        width: 40,
-                        height: 40,
+                        width: SizesManger.s40,
+                        height: SizesManger.s40,
                         padding: const EdgeInsets.symmetric(
-                          vertical: 10,
-                          horizontal: 5,
+                          vertical: SizesManger.s10,
+                          horizontal: SizesManger.s5,
                         ),
                         decoration: BoxDecoration(
-                            color: Colors.grey[400],
-                            borderRadius: BorderRadius.circular(20)),
+                            color: ColorManger.lightGrey,
+                            borderRadius:
+                                BorderRadius.circular(SizesManger.s15)),
                         child: const Text(
-                          "Like",
+                          StringManger.like,
                           style: TextStyle(
-                            color: Colors.white,
+                            color: ColorManger.white,
                             fontWeight: FontWeight.bold,
                           ),
                         )),
@@ -90,19 +95,20 @@ class _VideoDetailsScreenState extends State<VideoDetailsScreen> {
                   TextButton(
                     onPressed: () {},
                     child: Container(
-                        width: 50,
-                        height: 40,
+                        width: SizesManger.s50,
+                        height: SizesManger.s40,
                         padding: const EdgeInsets.symmetric(
-                          vertical: 10,
-                          horizontal: 5,
+                          vertical: SizesManger.s10,
+                          horizontal: SizesManger.s5,
                         ),
                         decoration: BoxDecoration(
-                            color: Colors.grey[400],
-                            borderRadius: BorderRadius.circular(25)),
+                            color: ColorManger.lightGrey,
+                            borderRadius:
+                                BorderRadius.circular(SizesManger.s25)),
                         child: const Text(
-                          "Dislike",
+                          StringManger.disLike,
                           style: TextStyle(
-                            color: Colors.white,
+                            color: ColorManger.white,
                             fontWeight: FontWeight.bold,
                           ),
                         )),
@@ -110,19 +116,20 @@ class _VideoDetailsScreenState extends State<VideoDetailsScreen> {
                   TextButton(
                     onPressed: () {},
                     child: Container(
-                        width: 50,
-                        height: 40,
+                        width: SizesManger.s50,
+                        height: SizesManger.s40,
                         padding: const EdgeInsets.symmetric(
-                          vertical: 10,
-                          horizontal: 5,
+                          vertical: SizesManger.s10,
+                          horizontal: SizesManger.s5,
                         ),
                         decoration: BoxDecoration(
-                            color: Colors.grey[400],
-                            borderRadius: BorderRadius.circular(20)),
+                            color: ColorManger.lightGrey,
+                            borderRadius:
+                                BorderRadius.circular(SizesManger.s20)),
                         child: const Text(
-                          "Share",
+                          StringManger.share,
                           style: TextStyle(
-                            color: Colors.white,
+                            color: ColorManger.white,
                             fontWeight: FontWeight.bold,
                           ),
                         )),
@@ -130,41 +137,41 @@ class _VideoDetailsScreenState extends State<VideoDetailsScreen> {
                 ],
               ),
               const SizedBox(
-                height: 10,
+                height: SizesManger.s50,
               ),
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  Text(
+                  const Text(
                     "100 views",
                     style: TextStyle(
-                      fontSize: 14,
+                      fontSize: SizesManger.s15,
                     ),
                   ),
                   Text(
                     widget.video!.date!,
-                    style: TextStyle(
-                      fontSize: 14,
+                    style: const TextStyle(
+                      fontSize: SizesManger.s15,
                     ),
                   ),
                   Text(
                     widget.video!.category!,
-                    style: TextStyle(
-                      fontSize: 14,
+                    style: const TextStyle(
+                      fontSize: SizesManger.s15,
                     ),
                   ),
                 ],
               ),
               const SizedBox(
-                height: 15,
+                height: SizesManger.s15,
               ),
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   Text(
                     widget.video!.user!.phoneNumber!,
-                    style: TextStyle(
-                      fontSize: 20,
+                    style: const TextStyle(
+                      fontSize: SizesManger.s20,
                       fontWeight: FontWeight.bold,
                     ),
                   ),
@@ -173,7 +180,7 @@ class _VideoDetailsScreenState extends State<VideoDetailsScreen> {
                       child: const Text(
                         "Show All Videos",
                         style: TextStyle(
-                          fontSize: 10,
+                          fontSize: SizesManger.s10,
                         ),
                       ))
                 ],

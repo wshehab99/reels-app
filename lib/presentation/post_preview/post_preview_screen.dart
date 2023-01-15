@@ -1,11 +1,13 @@
 import 'dart:io';
-
 import 'package:flutter/material.dart';
 import 'package:reels_app/helper/firebase_firestore_helper.dart';
 import 'package:reels_app/helper/location_helper.dart';
 import 'package:reels_app/models/user_model.dart';
 import 'package:reels_app/models/video_model.dart';
+import 'package:reels_app/presentation/resources/size_manger.dart';
+import 'package:reels_app/presentation/resources/string_manger.dart';
 import 'package:video_player/video_player.dart';
+import '../resources/color_manger.dart';
 
 class PostPreviewScreen extends StatefulWidget {
   const PostPreviewScreen({
@@ -30,7 +32,6 @@ class _PostPreviewScreenState extends State<PostPreviewScreen> {
     super.initState();
     LocationHelper.getAddress().then((value) {
       locationController.text = value;
-      print(value);
       setState(() {});
     });
     controller = VideoPlayerController.file(
@@ -44,10 +45,10 @@ class _PostPreviewScreenState extends State<PostPreviewScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text("Edit Post"),
+        title: const Text(StringManger.editPost),
       ),
       floatingActionButton: ElevatedButton(
-        child: const Text("Post"),
+        child: const Text(StringManger.post),
         onPressed: () async {
           if (formKey.currentState!.validate()) {
             await FirebaseFireStoreHelper.uploadVideo(widget.path)
@@ -69,7 +70,7 @@ class _PostPreviewScreenState extends State<PostPreviewScreen> {
       ),
       body: SingleChildScrollView(
         child: Padding(
-          padding: const EdgeInsets.all(8.0),
+          padding: const EdgeInsets.all(SizesManger.s10),
           child: Form(
             key: formKey,
             child: Column(children: [
@@ -77,17 +78,17 @@ class _PostPreviewScreenState extends State<PostPreviewScreen> {
                 controller: titleController,
                 validator: (value) {
                   if (value!.isEmpty) {
-                    return "title must not be empty";
+                    return StringManger.titleError;
                   }
                   return null;
                 },
                 decoration: InputDecoration(
-                    hintText: 'title',
+                    hintText: StringManger.title,
                     border: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(15))),
+                        borderRadius: BorderRadius.circular(SizesManger.s15))),
               ),
               const SizedBox(
-                height: 10,
+                height: SizesManger.s10,
               ),
               Row(
                 children: [
@@ -95,39 +96,41 @@ class _PostPreviewScreenState extends State<PostPreviewScreen> {
                     child: TextFormField(
                       validator: (value) {
                         if (value!.isEmpty) {
-                          return "location must not be empty";
+                          return StringManger.locationError;
                         }
                         return null;
                       },
                       controller: locationController,
                       decoration: InputDecoration(
-                          hintText: 'location',
+                          hintText: StringManger.location,
                           border: OutlineInputBorder(
-                              borderRadius: BorderRadius.circular(15))),
+                              borderRadius:
+                                  BorderRadius.circular(SizesManger.s15))),
                     ),
                   ),
                   const SizedBox(
-                    width: 15,
+                    width: SizesManger.s15,
                   ),
                   Expanded(
                     child: TextFormField(
                       controller: categoryController,
                       validator: (value) {
                         if (value!.isEmpty) {
-                          return "title must not be empty";
+                          return StringManger.categoryError;
                         }
                         return null;
                       },
                       decoration: InputDecoration(
-                          hintText: 'category',
+                          hintText: StringManger.category,
                           border: OutlineInputBorder(
-                              borderRadius: BorderRadius.circular(15))),
+                              borderRadius:
+                                  BorderRadius.circular(SizesManger.s15))),
                     ),
                   ),
                 ],
               ),
               const SizedBox(
-                height: 10,
+                height: SizesManger.s15,
               ),
               InkWell(
                 onTap: controller!.value.isPlaying
@@ -140,7 +143,7 @@ class _PostPreviewScreenState extends State<PostPreviewScreen> {
                   alignment: Alignment.center,
                   children: [
                     AspectRatio(
-                      aspectRatio: 3 / 4,
+                      aspectRatio: SizesManger.s3_4,
                       child: VideoPlayer(
                         controller!,
                       ),
@@ -156,8 +159,8 @@ class _PostPreviewScreenState extends State<PostPreviewScreen> {
                             ? const SizedBox()
                             : const Icon(
                                 Icons.play_circle,
-                                color: Colors.white70,
-                                size: 70,
+                                color: ColorManger.white70,
+                                size: SizesManger.s70,
                               ))
                   ],
                 ),

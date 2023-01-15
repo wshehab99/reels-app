@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:reels_app/presentation/resources/color_manger.dart';
+import 'package:reels_app/presentation/resources/string_manger.dart';
 
 class AppNavigationBar extends StatelessWidget {
   const AppNavigationBar({
@@ -15,26 +17,26 @@ class AppNavigationBar extends StatelessWidget {
       showSelectedLabels: false,
       showUnselectedLabels: false,
       onTap: onChange,
-      items: [
+      items: const [
         BottomNavigationBarItem(
           activeIcon: Text(
-            "Explore",
+            StringManger.explore,
             style: TextStyle(
-              color: Colors.blue,
+              color: ColorManger.blue,
             ),
           ),
-          icon: Text("Explore"),
-          label: "Explore",
+          icon: Text(StringManger.explore),
+          label: StringManger.explore,
         ),
         BottomNavigationBarItem(
           activeIcon: Text(
-            "Library",
+            StringManger.library,
             style: TextStyle(
-              color: Colors.blue,
+              color: ColorManger.blue,
             ),
           ),
-          icon: Text("Library"),
-          label: "Library",
+          icon: Text(StringManger.library),
+          label: StringManger.library,
         ),
       ],
     );

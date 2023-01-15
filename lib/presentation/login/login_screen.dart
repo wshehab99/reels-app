@@ -1,9 +1,12 @@
 import 'package:fl_country_code_picker/fl_country_code_picker.dart';
 import 'package:flutter/material.dart';
+import 'package:reels_app/presentation/resources/assets_manger.dart';
+import 'package:reels_app/presentation/resources/size_manger.dart';
+import 'package:reels_app/presentation/resources/string_manger.dart';
 
-import '../helper/firebase_helper.dart';
-import '../widgets/country_code_text_field.dart';
-import 'otp_screen.dart';
+import '../../helper/firebase_helper.dart';
+import '../common/widgets/country_code_text_field.dart';
+import '../otp/otp_screen.dart';
 
 class LoginScreen extends StatefulWidget {
   const LoginScreen({super.key});
@@ -13,7 +16,10 @@ class LoginScreen extends StatefulWidget {
 }
 
 class _LoginScreenState extends State<LoginScreen> {
-  CountryCode code = const CountryCode(name: "US", code: "US", dialCode: "+1");
+  CountryCode code = const CountryCode(
+      name: StringManger.us,
+      code: StringManger.us,
+      dialCode: StringManger.usCode);
   final TextEditingController phoneNumberController = TextEditingController();
   bool loading = false;
   @override
@@ -26,36 +32,36 @@ class _LoginScreenState extends State<LoginScreen> {
             child: Column(
               children: [
                 Image.asset(
-                  "assets/img/logo.png",
-                  height: 200,
+                  AssetsManager.logo,
+                  height: SizesManger.s200,
                 ),
                 const SizedBox(
                   height: 25,
                 ),
                 const Text(
-                  "What is your phone number",
+                  StringManger.yourPhoneNumber,
                   style: TextStyle(
-                    fontSize: 26,
+                    fontSize: SizesManger.s26,
                     fontWeight: FontWeight.bold,
                   ),
                 ),
                 const SizedBox(
-                  height: 10,
+                  height: SizesManger.s10,
                 ),
                 const Text(
-                  "Tap next to get SMS confirmation",
+                  StringManger.getSMSconfirmation,
                   style: TextStyle(
-                    fontSize: 16,
+                    fontSize: SizesManger.s15,
                     fontWeight: FontWeight.w400,
                   ),
                 ),
                 const SizedBox(
-                  height: 20,
+                  height: SizesManger.s20,
                 ),
                 Row(
                   children: [
                     Expanded(
-                      flex: 1,
+                      flex: SizesManger.s1,
                       child: CountryCodeTextField(
                         code: code,
                         onChange: () async {
@@ -73,10 +79,11 @@ class _LoginScreenState extends State<LoginScreen> {
                         keyboardType: TextInputType.number,
                         controller: phoneNumberController,
                         decoration: InputDecoration(
-                          labelText: "Phone Number",
-                          hintText: "Enter your phone number",
+                          labelText: StringManger.phoneNumber,
+                          hintText: StringManger.phoneNumberHint,
                           border: OutlineInputBorder(
-                            borderRadius: BorderRadius.circular(25),
+                            borderRadius:
+                                BorderRadius.circular(SizesManger.s25),
                           ),
                         ),
                       ),
@@ -84,7 +91,7 @@ class _LoginScreenState extends State<LoginScreen> {
                   ],
                 ),
                 const SizedBox(
-                  height: 25,
+                  height: SizesManger.s25,
                 ),
                 loading
                     ? const CircularProgressIndicator()
@@ -110,7 +117,7 @@ class _LoginScreenState extends State<LoginScreen> {
                             });
                           }
                         },
-                        child: const Text("Next"))
+                        child: const Text(StringManger.next))
               ],
             ),
           ),
